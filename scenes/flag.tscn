@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://blor87cu28j2o"]
+
+[ext_resource type="ArrayMesh" uid="uid://bbbte4swr2pss" path="res://assets/flag.obj" id="1_ui0wg"]
+
+[node name="flag" type="Node3D"]
+
+[node name="flag_mesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_ui0wg")

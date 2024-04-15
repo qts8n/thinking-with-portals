@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi530uqhqbu3w"]
+
+[ext_resource type="ArrayMesh" uid="uid://cx6r1g3kegf7n" path="res://assets/coin.obj" id="1_mq6t5"]
+[ext_resource type="Script" path="res://src/coin_mesh.gd" id="2_mcq4s"]
+
+[node name="coin" type="Node3D"]
+
+[node name="coin_mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 1, 0)
+mesh = ExtResource("1_mq6t5")
+script = ExtResource("2_mcq4s")

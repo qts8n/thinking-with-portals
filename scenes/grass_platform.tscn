@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://cxh3byjkkk5m8"]
+
+[ext_resource type="ArrayMesh" uid="uid://fnresse3xbuu" path="res://assets/grass.obj" id="1_vw1yq"]
+[ext_resource type="PackedScene" uid="uid://c64t208gs358f" path="res://scenes/tree.tscn" id="2_3wsp8"]
+[ext_resource type="PackedScene" uid="uid://bi530uqhqbu3w" path="res://scenes/coin.tscn" id="3_xps3f"]
+[ext_resource type="PackedScene" uid="uid://dd3iysk3m46cu" path="res://scenes/portal.tscn" id="4_x1ikq"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xg8ch"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_00gvx"]
+points = PackedVector3Array(0.121051, 0.0670937, 0.223963, -0.0186514, 0.104297, -0.307471, -0.0190203, 0.199067, -0.313194, -0.306901, 0.209246, 0.0777157, 0.294935, 0.2181, 0.086485, -0.206227, 0.0291927, 0.0474034, 0.168033, 0.02956, -0.120793, -0.142639, 0.2181, 0.27681, -0.247369, 0.2181, -0.198829, 0.237832, 0.2181, -0.198887, 0.303676, 0.103984, 0.0767085, 0.142639, 0.2181, 0.27681, -0.161534, 0.0279105, -0.132181, -0.133009, 0.122952, 0.276471, -0.259204, 0.113384, -0.171759, 0.0938095, 0.0291282, 0.188207, 0.244378, 0.122952, -0.196702, -0.302642, 0.104048, 0.0763853, 0.143964, 0.113383, 0.279548, -0.0936564, 0.0292813, 0.18787, 0.0185157, 0.0300101, -0.204005, 0.206237, 0.0291882, 0.0474634, 0.0185799, 0.10431, -0.307267, 0.00947751, 0.2181, -0.303577, 0.306831, 0.199634, 0.0393457, -0.241089, 0.104417, -0.194243, 0.0189856, 0.199167, -0.313582, -0.309081, 0.200196, 0.0397087, -0.17201, 0.132498, 0.249443, -0.294876, 0.2181, 0.0769572, 0.248852, 0.209076, -0.199971, 0.211637, 0.199901, 0.203109)
+
+[node name="grass_platform" type="Node3D"]
+
+[node name="platform" type="StaticBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_xg8ch")
+
+[node name="platform_hitbox" type="CollisionShape3D" parent="platform"]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, -10.85, 0)
+shape = SubResource("ConvexPolygonShape3D_00gvx")
+
+[node name="platform_mesh" type="MeshInstance3D" parent="platform/platform_hitbox"]
+mesh = ExtResource("1_vw1yq")
+skeleton = NodePath("../..")
+
+[node name="pine_tree_mid" parent="." instance=ExtResource("2_3wsp8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
+
+[node name="pine_tree_big" parent="." instance=ExtResource("2_3wsp8")]
+transform = Transform3D(1.555, 0, 0, 0, 1.555, 0, 0, 0, 1.555, 10, 0, -7)
+
+[node name="pine_tree_small" parent="." instance=ExtResource("2_3wsp8")]
+transform = Transform3D(0.76, 0, 0, 0, 0.76, 0, 0, 0, 0.76, -10, 0, 3)
+
+[node name="pine_tree" parent="." instance=ExtResource("2_3wsp8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -10)
+
+[node name="coin" parent="." instance=ExtResource("3_xps3f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5)
+
+[node name="portal" parent="." instance=ExtResource("4_x1ikq")]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -5, 0, -1)
