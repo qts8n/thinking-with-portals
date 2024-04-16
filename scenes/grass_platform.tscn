@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxh3byjkkk5m8"]
+[gd_scene load_steps=6 format=3 uid="uid://cxh3byjkkk5m8"]
 
 [ext_resource type="ArrayMesh" uid="uid://fnresse3xbuu" path="res://assets/grass.obj" id="1_vw1yq"]
 [ext_resource type="PackedScene" uid="uid://c64t208gs358f" path="res://scenes/tree.tscn" id="2_3wsp8"]
 [ext_resource type="PackedScene" uid="uid://bi530uqhqbu3w" path="res://scenes/coin.tscn" id="3_xps3f"]
-[ext_resource type="PackedScene" uid="uid://dd3iysk3m46cu" path="res://scenes/portal.tscn" id="4_x1ikq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xg8ch"]
 
@@ -37,6 +36,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -10)
 
 [node name="coin" parent="." instance=ExtResource("3_xps3f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5)
-
-[node name="portal" parent="." instance=ExtResource("4_x1ikq")]
-transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -5, 0, -1)
