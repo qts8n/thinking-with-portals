@@ -1,7 +1,8 @@
 extends CharacterBody3D
 
 
-const PI_2 = PI / 2
+const PI2 = PI * 2.0
+const PI_2 = PI / 2.0
 const FOV_SCALAR = 1.5
 const FOV_INERTIA_SCALAR = 8.0
 const GROUND_INERTIA_SCALAR = 7.0
@@ -22,10 +23,14 @@ const AIR_INERTIA_SCALAR = 3.0
 @export var BOB_HORIZONTAL_FREQUENCY = 1.0
 @export var BOB_AMPLITUDE = 0.08
 
+var BOB_VERTICAL_CAP = PI2 * BOB_VERTICAL_FREQUENCY
+var BOB_HORIZONTAL_CAP = PI2 * BOB_HORIZONTAL_FREQUENCY
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var GRAVITY: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-var t_bob: float = 0.0
+var t_bob_vertical: float = 0.0
+var t_bob_horizontal: float = 0.0
 var speed: float = 0.0
 
 @onready var head = $player_hitbox/player_head
@@ -86,8 +91,14 @@ func _physics_process(delta: float) -> void:
 	var velocity_mag = velocity.length()
 
 	# Head bob
-	t_bob += velocity_mag * float(on_floor) * delta
-	camera.transform.origin = _headbob(t_bob)
+	var t_bob = velocity_mag * float(on_floor) * delta
+	t_bob_vertical += t_bob
+	if t_bob_vertical >= BOB_VERTICAL_CAP:
+		t_bob_vertical = 0.0
+	t_bob_horizontal += t_bob
+	if t_bob_horizontal >= BOB_HORIZONTAL_CAP:
+		t_bob_horizontal = 0.0
+	camera.transform.origin = _headbob()
 
 	# FOV
 	var velocity_clamped = clamp(velocity_mag, 0.0, MAX_SPEED)
@@ -97,8 +108,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func _headbob(time: float) -> Vector3:
+func _headbob() -> Vector3:
 	var pos = Vector3.ZERO
-	pos.x = cos(time * BOB_HORIZONTAL_FREQUENCY) * BOB_AMPLITUDE
-	pos.y = sin(time * BOB_VERTICAL_FREQUENCY) * BOB_AMPLITUDE
+	pos.x = cos(t_bob_horizontal * BOB_HORIZONTAL_FREQUENCY) * BOB_AMPLITUDE
+	pos.y = sin(t_bob_vertical * BOB_VERTICAL_FREQUENCY) * BOB_AMPLITUDE
 	return pos
