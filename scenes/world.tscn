@@ -1,6 +1,5 @@
-[gd_scene load_steps=13 format=3 uid="uid://mxamvg3qqrgk"]
+[gd_scene load_steps=12 format=3 uid="uid://mxamvg3qqrgk"]
 
-[ext_resource type="Script" path="res://src/world.gd" id="1_d70eb"]
 [ext_resource type="Script" path="res://src/player.gd" id="2_arj1u"]
 [ext_resource type="PackedScene" uid="uid://cxh3byjkkk5m8" path="res://scenes/grass_platform.tscn" id="2_grsgv"]
 [ext_resource type="PackedScene" uid="uid://dd3iysk3m46cu" path="res://scenes/portal.tscn" id="3_40yfg"]
@@ -29,7 +28,6 @@ size = Vector3(1, 2, 1)
 font_size = 24
 
 [node name="world" type="Node3D"]
-script = ExtResource("1_d70eb")
 
 [node name="sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433012, 0, 0, 0)
@@ -55,19 +53,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="player_camera" type="Camera3D" parent="player/player_hitbox/player_head"]
 
-[node name="portal_camera" type="Camera3D" parent="."]
-
 [node name="grass_platform" parent="." instance=ExtResource("2_grsgv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 
-[node name="grass_portal" parent="grass_platform" instance=ExtResource("3_40yfg")]
+[node name="grass_portal" parent="grass_platform" node_paths=PackedStringArray("PLAYER_CAMERA", "LINKED_PORTAL") instance=ExtResource("3_40yfg")]
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -4, 0, 3)
+PLAYER_CAMERA = NodePath("../../player/player_hitbox/player_head/player_camera")
+LINKED_PORTAL = NodePath("../../rock_platform/rock_portal")
 
 [node name="rock_platform" parent="." instance=ExtResource("3_nlklq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 0)
 
-[node name="rock_portal" parent="rock_platform" instance=ExtResource("3_40yfg")]
+[node name="rock_portal" parent="rock_platform" node_paths=PackedStringArray("PLAYER_CAMERA", "LINKED_PORTAL") instance=ExtResource("3_40yfg")]
 transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, -4, 0, -2)
+PLAYER_CAMERA = NodePath("../../player/player_hitbox/player_head/player_camera")
+LINKED_PORTAL = NodePath("../../grass_platform/grass_portal")
 
 [node name="fps_counter" type="Label" parent="."]
 offset_right = 200.0
