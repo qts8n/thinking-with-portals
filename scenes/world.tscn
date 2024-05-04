@@ -45,6 +45,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_rqnto")
 
 [node name="player_mesh" type="MeshInstance3D" parent="player/player_hitbox"]
+layers = 524288
 mesh = SubResource("CapsuleMesh_ql34n")
 skeleton = NodePath("../..")
 
@@ -56,18 +57,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 [node name="grass_platform" parent="." instance=ExtResource("2_grsgv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 
-[node name="grass_portal" parent="grass_platform" node_paths=PackedStringArray("PLAYER_CAMERA", "LINKED_PORTAL") instance=ExtResource("3_40yfg")]
+[node name="grass_portal" parent="grass_platform" node_paths=PackedStringArray("LINKED_PORTAL") instance=ExtResource("3_40yfg")]
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -4, 0, 3)
-PLAYER_CAMERA = NodePath("../../player/player_hitbox/player_head/player_camera")
 LINKED_PORTAL = NodePath("../../rock_platform/rock_portal")
+DEBUG_COLOR = Color(0, 0, 1, 1)
 
 [node name="rock_platform" parent="." instance=ExtResource("3_nlklq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 0)
 
-[node name="rock_portal" parent="rock_platform" node_paths=PackedStringArray("PLAYER_CAMERA", "LINKED_PORTAL") instance=ExtResource("3_40yfg")]
+[node name="rock_portal" parent="rock_platform" node_paths=PackedStringArray("LINKED_PORTAL") instance=ExtResource("3_40yfg")]
 transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, -4, 0, -2)
-PLAYER_CAMERA = NodePath("../../player/player_hitbox/player_head/player_camera")
 LINKED_PORTAL = NodePath("../../grass_platform/grass_portal")
+DEBUG_COLOR = Color(1, 0, 0, 1)
 
 [node name="fps_counter" type="Label" parent="."]
 offset_right = 200.0
